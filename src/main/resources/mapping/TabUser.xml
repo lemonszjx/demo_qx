@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.dao.TabUserDao">
+
+    <select id="findAll" resultType="TabUser">
+        select * from tab_users
+    </select>
+    <insert id="add" parameterType="TabUser">
+        insert into tab_users(id,loginname,password,username,tel,sex,age,createname,createtime,updatename,updatetime,stat) values
+                             (#{id},#{loginname},#{password},#{username},#{tel},#{sex},#{age},#{createname},#{createtime},#{updatename},#{updatetime},#{stat})
+    </insert>
+    <delete id="delete" parameterType="java.lang.String">
+        delete from tab_users where id=#{id}
+    </delete>
+    <select id="findbyid" parameterType="java.lang.String" resultType="TabUser">
+        select * from tab_users where id=#{id}
+    </select>
+    <update id="update" parameterType="TabUser">
+        update tab_users set loginname=#{loginname},password=#{password},username=#{username},tel=#{tel},createname=#{createname},createtime=#{createtime},stat='1' where id=#{id}
+    </update>
+    <update id="updateopen" parameterType="java.lang.String">
+        update tab_users set stat='1' where id=#{id}
+    </update>
+    <update id="updateclose" parameterType="java.lang.String">
+        update tab_users set stat='0' where id=#{id}
+    </update>
+
+</mapper>

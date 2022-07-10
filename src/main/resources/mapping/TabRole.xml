@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.dao.TabRoleDao">
+    <select id="findall" resultType="TabRole">
+        select * from tab_role
+    </select>
+    <insert id="add" parameterType="TabRole">
+        insert into tab_role(id,rolename,contents,stat,createname,createtime,updatename,updatetime) values(#{id},#{rolename},#{contents},#{stat},#{createname},#{createtime},#{updatename},#{updatetime})
+    </insert>
+    <delete id="delete" parameterType="java.lang.String">
+        delete from tab_role where id=#{id}
+    </delete>
+    <select id="findbyid" parameterType="java.lang.String" resultType="TabRole">
+        select * from tab_role where id=#{id}
+    </select>
+    <update id="update" parameterType="TabRole">
+        update tab_role set rolename=#{rolename},contents=#{contents},stat=#{stat},createname=#{createname},createtime=#{createtime},updatename=#{updatename},updatetime=#{updatetime} where id=#{id}
+    </update>
+    <select id="select_check_role_view" resultType="TabRole" >
+        select r.*,ifnull(u.id,0) as usersid  from tab_users u
+        RIGHT JOIN sys_user ur ON u.id=ur.userid
+        RIGHT JOIN tab_role r  ON ur.roleid = r.id where r.stat='0'
+
+    </select>
+</mapper>
